@@ -14,7 +14,5 @@ public class GestionClient {
     public void ajouterClient(Client client){
         this.daoClient.insererClient(client);
     }
-    public <Client> Object rechercherTousClients(String email){
-       return this.daoClient.getClientByEmail(email);
-    }
+
 }
