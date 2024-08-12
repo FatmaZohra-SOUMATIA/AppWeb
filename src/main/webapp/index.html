@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil - Ferme</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            color: aliceblue;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('img/farm-background2.jpg') no-repeat center center fixed; /* Image de fond */
+            background-size: cover; /* Ajuster l'image pour couvrir tout l'arrière-plan */
+            position: relative; /* Nécessaire pour positionner l'élément flou en dessous */
+        }
+        .blurred-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit; /* Hérite de l'image de fond du body */
+            filter: blur(10px); /* Applique un effet de flou */
+            z-index: -1; /* Place l'élément flou derrière le contenu principal */
+        }
+        .container {
+            text-align: center;
+            position: relative; /* Nécessaire pour le positionnement par rapport à l'arrière-plan flou */
+            z-index: 1; /* Assure que le contenu est au-dessus de l'arrière-plan flou */
+        }
+        .button {
+            display: inline-block;
+            padding: 20px 40px;
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .new-client {
+            background-color: #4CAF50; /* Couleur pour les nouveaux clients */
+        }
+        .existing-client {
+            background-color: #2196F3; /* Couleur pour les anciens clients */
+        }
+        .form-section {
+            display: none;
+            margin-top: 20px;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .form-section input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .form-section button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="blurred-background"></div>
+<div class="container">
+    <h1>Bienvenue à la Ferme</h1>
+    <p>Veuillez sélectionner votre statut :</p>
+    <a href="#" class="button new-client" onclick="showForm('new')">Nouveau Client</a>
+    <a href="#" class="button existing-client" onclick="showForm('existing')">Ancien Client</a>
+
+    <div id="new-client-form" class="form-section">
+        <h2>Inscription Nouveau Client</h2>
+        <form action="app-servlet" method="post">
+            <input type="hidden" name="clientType" value="new" />
+            <input type="text" id="new-name" name="name" placeholder="Nom" required />
+            <input type="email" id="new-email" name="email" placeholder="Email" required />
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+
+    <div id="existing-client-form" class="form-section">
+        <h2>Connexion Ancien Client</h2>
+        <form action="app-servlet" method="post">
+            <input type="hidden" name="clientType" value="existing" />
+            <input type="email" id="existing-email" name="email" placeholder="Email" required />
+            <button type="submit">Se Connecter</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showForm(type) {
+        // Hide both sections
+        document.getElementById('new-client-form').classList.remove('active');
+        document.getElementById('existing-client-form').classList.remove('active');
+
+        // Show the selected section
+        if (type === 'new') {
+            document.getElementById('new-client-form').classList.add('active');
+        } else if (type === 'existing') {
+            document.getElementById('existing-client-form').classList.add('active');
+        }
+    }
+</script>
+</body>
+</html>
