@@ -3,7 +3,7 @@ package tp_programmationweb.appweb_fermebio.modele;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "Client")
 public class Client {
 
     @Id
@@ -17,13 +17,6 @@ public class Client {
 
     // Constructeurs
     public Client() {}
-
-    public Client( String nom, String email, String adresse) {
-
-        this.nom = nom;
-        this.email = email;
-
-    }
 
     // Getters et Setters
     public int getId() {
@@ -48,6 +41,11 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Client [id=" + id + ", nom=" + nom + ", email=" + email + "]";
     }
 
 }

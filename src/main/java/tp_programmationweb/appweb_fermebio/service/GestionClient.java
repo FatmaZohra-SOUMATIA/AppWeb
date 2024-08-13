@@ -11,7 +11,8 @@ public class GestionClient {
         this.daoClient = daoClient;
     }
 
-    public void ajouterClient(Client client){
+    public void ajouterClient(Client client) {
+
         this.daoClient.insererClient(client);
     }
 
