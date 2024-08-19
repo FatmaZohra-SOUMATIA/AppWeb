@@ -1,27 +1,39 @@
 package tp_programmationweb.appweb_fermebio.modele;
 
+import jakarta.persistence.*;
+
+@Entity
 public class LigneCommande {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "IdProduit", nullable = false)
     private Produit produit;
+
+    @Column(nullable = false)
     private int quantite;
+
+    @Column(nullable = false)
     private double prix;
 
     // Constructeurs
     public LigneCommande() {}
 
-    public LigneCommande(Long id, Produit produit, int quantite, double prix) {
-        this.id = id;
+    public LigneCommande(Produit produit, int quantite, double prix) {
+
         this.produit = produit;
         this.quantite = quantite;
         this.prix = prix;
     }
 
     // Getters et Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,4 +60,14 @@ public class LigneCommande {
     public void setPrix(double prix) {
         this.prix = prix;
     }
+    @Override
+    public String toString() {
+        return "LigneCommande{" +
+                "id=" + id +
+                ", produit=" + produit +
+                ", quantite=" + quantite +
+                ", prix=" + prix +
+                '}';
+    }
+
 }

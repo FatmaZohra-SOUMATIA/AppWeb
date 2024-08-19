@@ -12,7 +12,7 @@ public class GestionClient {
     }
 
     public void ajouterClient(Client client) {
-
+        System.out.println("appel au dao pour l ajout de "+ client);
         this.daoClient.insererClient(client);
     }
 

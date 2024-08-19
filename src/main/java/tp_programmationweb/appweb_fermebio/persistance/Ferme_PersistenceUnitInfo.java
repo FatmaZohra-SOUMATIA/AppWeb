@@ -58,6 +58,11 @@ public class Ferme_PersistenceUnitInfo implements PersistenceUnitInfo {
     public List<String> getManagedClassNames() {
         List<String> managedClassNames = new ArrayList<>();
         managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.Client");
+        managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.LigneCommande");
+        managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.Commande");
+        managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.Produit");
+        managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.Message");
+        managedClassNames.add("tp_programmationweb.appweb_fermebio.modele.ProduitTraduction");
         return managedClassNames;
     }
 

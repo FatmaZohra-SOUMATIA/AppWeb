@@ -9,8 +9,8 @@ import tp_programmationweb.appweb_fermebio.modele.Client;
 import tp_programmationweb.appweb_fermebio.persistance.DAO_Client;
 import tp_programmationweb.appweb_fermebio.service.GestionClient;
 
-@WebServlet(name = "AppServlet", value = "/app-servlet")
-public class AppServlet extends HttpServlet {
+@WebServlet(name = "GestionClientServlet", value = "/gestionClient-servlet")
+public class GestionClientServlet extends HttpServlet {
 
 
     public void init() {

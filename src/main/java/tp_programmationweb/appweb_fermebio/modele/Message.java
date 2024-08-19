@@ -1,41 +1,33 @@
 package tp_programmationweb.appweb_fermebio.modele;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import java.sql.Date;
 
+@Entity
 public class Message {
-    private Long id;
-    private Client client;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
     private String contenu;
+
+    @Column(nullable = false)
     private Date date;
 
     // Constructeurs
     public Message() {}
 
-    public Message(Long id, Client client, String contenu, Date date) {
-        this.id = id;
-        this.client = client;
-        this.contenu = contenu;
-        this.date = date;
-    }
+
 
     // Getters et Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-
     public String getContenu() {
         return contenu;
     }
@@ -51,5 +43,13 @@ public class Message {
     public void setDate(Date date) {
         this.date = date;
     }
-}
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                 ", contenu='" + contenu + '\'' +
+                ", date=" + date +
+                '}';
+    }
 
+}

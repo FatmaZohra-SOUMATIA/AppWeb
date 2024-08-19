@@ -1,0 +1,4 @@
+ Driver: org.mariadb.jdbc.Driver
+ URL : jdbc:mariadb://mysql-fatmaa10.alwaysdata.net:3306/fatmaa10_testclient
+User: fatmaa10_testcli
+Password: aa11bb22cc33

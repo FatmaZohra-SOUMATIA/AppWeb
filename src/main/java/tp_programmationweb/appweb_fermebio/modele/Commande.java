@@ -1,47 +1,40 @@
 package tp_programmationweb.appweb_fermebio.modele;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
+@Entity
 public class Commande {
-    private Long id;
-    private Date date;
-    private Client client;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
+    private java.sql.Date date;
+
+    @OneToMany
+    @JoinColumn(name = "IdCommande")
     private List<LigneCommande> lignesCommande;
 
     // Constructeurs
     public Commande() {}
 
-    public Commande( Date date, Client client, List<LigneCommande> lignesCommande) {
-
-        this.date = date;
-        this.client = client;
-        this.lignesCommande = lignesCommande;
-    }
-
     // Getters et Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public List<LigneCommande> getLignesCommande() {
@@ -51,5 +44,13 @@ public class Commande {
     public void setLignesCommande(List<LigneCommande> lignesCommande) {
         this.lignesCommande = lignesCommande;
     }
-}
+    @Override
+    public String toString() {
+        return "Commande{" +
+                "id=" + id +
+                ", date=" + date +
+                ", lignesCommande=" + lignesCommande +
+                '}';
+    }
 
+}

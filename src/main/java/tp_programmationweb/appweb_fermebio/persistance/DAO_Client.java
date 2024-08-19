@@ -39,4 +39,12 @@ public class DAO_Client {
             throw new IllegalArgumentException("Client ou ses attributs ne peuvent pas être null.");
         }
     }
+    public void close() {
+        if (em != null) {
+            em.close();
+        }
+        if (emf != null) {
+            emf.close();
+        }
+    }
 }
