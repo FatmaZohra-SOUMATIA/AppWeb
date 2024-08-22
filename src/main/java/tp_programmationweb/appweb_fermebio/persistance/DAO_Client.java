@@ -5,9 +5,11 @@ import jakarta.persistence.spi.PersistenceUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import tp_programmationweb.appweb_fermebio.modele.Client;
 
+
 import java.util.HashMap;
 
-public class DAO_Client {
+
+public class DAO_Client implements IClientDAO {
     private EntityManagerFactory emf;
     private EntityManager em;
 
@@ -19,6 +21,7 @@ public class DAO_Client {
 
     }
 
+    @Override
     public void insererClient(Client nouveauClient) {
 
         if (nouveauClient != null && nouveauClient.getNom() != null && nouveauClient.getEmail() != null) {
@@ -39,6 +42,62 @@ public class DAO_Client {
             throw new IllegalArgumentException("Client ou ses attributs ne peuvent pas être null.");
         }
     }
+
+    @Override
+    public Client trouverClientParId(int id) {
+        return em.find(Client.class, id);
+    }
+
+    @Override
+    public Client trouverParMail(String email) {
+        try {
+            TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.email = :email", Client.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la recherche du client par email", e);
+        }
+    }
+
+    @Override
+    public void mettreAJourClient(Client client) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(client);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la mise à jour du client", e);
+        }
+    }
+
+    @Override
+    public void supprimerClient(int id) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Client client = em.find(Client.class, id);
+            if (client != null) {
+                em.remove(client);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la suppression du client", e);
+        }
+    }
+
+    @Override
     public void close() {
         if (em != null) {
             em.close();

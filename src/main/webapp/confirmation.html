@@ -46,6 +46,10 @@
     </style>
 </head>
 <body>
+<c:set var="client" value= "${sessionScope.client}"  />
+<div>
+    Bienvenue, ${client.nom}!
+</div>
 <div class="confirmation-container">
     <h1>Merci !</h1>
     <p>Votre inscription a été enregistrée avec succès.</p>

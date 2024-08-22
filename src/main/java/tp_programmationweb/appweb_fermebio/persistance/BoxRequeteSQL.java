@@ -10,7 +10,8 @@ public class BoxRequeteSQL {
 
     //Requête pour inserer un nouveau client
     final static  String INSERT_CLIENT ="INSERT INTO Client (nom, email) VALUES (?, ?)";
-
+    //
+    final static  String SELECT_CLIENT_BY_MAIL="SELECT c FROM Client c WHERE c.email = :email";
 }
 
 

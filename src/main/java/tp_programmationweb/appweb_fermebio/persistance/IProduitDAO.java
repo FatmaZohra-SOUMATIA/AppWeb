@@ -11,4 +11,6 @@ public interface IProduitDAO {
     Produit trouverProduitParId(int id);
     List<Produit> trouverTousLesProduits();
     List<ProduitDTO> trouverProduitsParLangue(String langue)   ;
+
+    void maisAJourQtsProduit(int idProduit, int qts);
 }

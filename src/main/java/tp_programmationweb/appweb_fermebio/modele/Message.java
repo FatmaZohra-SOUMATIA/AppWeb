@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
+
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

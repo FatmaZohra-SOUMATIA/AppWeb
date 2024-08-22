@@ -24,6 +24,9 @@ public class GestionClientServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Récupérer le type de client
         String clientType = request.getParameter("clientType");
+        HttpSession session = request.getSession();
+
+
 
         if ("new".equals(clientType)) {
             // Traitement pour les nouveaux clients
@@ -42,23 +45,33 @@ public class GestionClientServlet extends HttpServlet {
             service.ajouterClient(newClient);
 
             // Rediriger vers une page de confirmation ou d'accueil
-            response.sendRedirect("confirmation.html");
-
+            //response.sendRedirect("confirmation.html");
+            session.setAttribute("client", newClient);
         } else if ("existing".equals(clientType)) {
             // Traitement pour les anciens clients
             String email = request.getParameter("email");
 
-            // Vous pouvez ajouter une logique pour vérifier si le client existe, par exemple
-            // Client existingClient = clientService.getClientByEmail(email);
-            // Si le client existe, rediriger vers une page appropriée
+            Client ancienClient = new Client();
 
-            // Rediriger vers une page de confirmation ou d'accueil
-            response.sendRedirect("index.html");
+            DAO_Client dao = new DAO_Client();
+            GestionClient service = new GestionClient(dao);
+            ancienClient= service.trouverClient(email);
+            if (ancienClient != null) {
+
+                session.setAttribute("client", ancienClient);
+            } else{
+                // Rediriger vers une page de confirmation ou d'accueil
+                response.sendRedirect("index.html");
+            }
+
+
 
         } else {
             // Gestion des erreurs ou redirection en cas de type de client invalide
             response.sendRedirect("error.html");
         }
+        request.getRequestDispatcher("/jsp/accueil.jsp").forward(request, response);
+
     }
 
 

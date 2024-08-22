@@ -108,4 +108,8 @@ public class DAO_Produit implements IProduitDAO {
             emf.close();
         }
     }
+
+    public void maisAJourQtsProduit(int idProduit, int qts) {
+
+    }
 }
